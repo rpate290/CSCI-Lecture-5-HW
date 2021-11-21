@@ -1,53 +1,26 @@
 # CSCI-Lecture-5-HW
 package lecture5Hw;
 
-public class Hw5 {
-
-abstract class payCalculator{
-	double computePay(double pay, double hours) {
-		return hours*pay;
-	}
-class regularPay extends payCalculator{
-	regularPay(double i,double n){
-		 double payRate= i;
-	     double hours= n;
-		
-	}
-
-	
+interface MessageEncoder{
+abstract void encode(String plainText, int shift);
 }
-class hazardPay extends payCalculator{
-	double computePay(double pay, double hours) {
-		return hours*pay*1.5;
-	}
-abstract class discountPolicy{
-	double itemCount;
-	double itemCost;
-	abstract double computeDiscount(double count, double itemcost);
-class bulkDiscount extends discountPolicy{
-	int minimum;
-	double discount;
-	double total;
-	bulkDiscount(int m, double p){
-	minimum=m;
-	discount=p;}
-	double computeDiscount(double count,  double itemcost) {
-		if(count>minimum){
-		double total=itemcost/2;
-		return total;}
-		else {
-		double total=itemcost;
-		return total;
-			
+
+public class SubstitutionCipher implements MessageEncoder {
+	int shift;
+	SubstitutionCipher(int s){
+		shift=s;}
+	 public void encode(String plainText, int shift) {
+		char[] messageArray= plainText.toCharArray();
+		for (char i: messageArray) {
+			i+=shift;
+			System.out.print(i);}}
+		public static void main(String[] args) {
+			int shift= 1;
+			String message= "hello";
+			System.out.println(message);
+			MessageEncoder p= new SubstitutionCipher(shift);
+			p.encode(message, shift);
 		}
-		
-	}
 	
-		 
-}}
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
-
-}}}
